@@ -46,3 +46,23 @@ class Solution(object):
             rs = tmp
 
         return rs
+
+
+class Solution2(object):
+    def deepestLeavesSum(self, root):
+        sums = []
+
+        def dfs(root, lv):
+            if not root:
+                return
+            if lv == len(sums):
+                sums.append(root.val)
+            else:
+                sums[lv] += root.val
+
+            dfs(root.left, lv + 1)
+            dfs(root.right, lv + 1)
+
+        dfs(root, 0)
+
+        return sums[-1]
